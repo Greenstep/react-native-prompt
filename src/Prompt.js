@@ -32,6 +32,9 @@ export default class Prompt extends Component {
     cancelButtonTextStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     textInputProps: PropTypes.object,
+    submitButtonTestId: PropTypes.string,
+    cancelButtonTestId: PropTypes.string,
+    textInputTestId: PropTypes.string,
   };
 
   static defaultProps = {
@@ -100,7 +103,10 @@ export default class Prompt extends Component {
       submitButtonTextStyle,
       cancelButtonStyle,
       cancelButtonTextStyle,
-      inputStyle
+      inputStyle,
+      submitButtonTestId,
+      cancelButtonTestId,
+      textInputTestId
     } = this.props;
     return (
       <View style={styles.dialog} key="prompt">
@@ -119,17 +125,18 @@ export default class Prompt extends Component {
               placeholder={placeholder}
               autoFocus={true}
               underlineColorAndroid="white"
+              testID={textInputTestId}
               {...this.props.textInputProps} />
           </View>
           <View style={[styles.dialogFooter, { borderColor }]}>
-            <TouchableWithoutFeedback onPress={this._onCancelPress}>
+            <TouchableWithoutFeedback onPress={this._onCancelPress} testID={cancelButtonTestId}>
               <View style={[styles.dialogAction, buttonStyle, cancelButtonStyle]}>
                 <Text style={[styles.dialogActionText, buttonTextStyle, cancelButtonTextStyle]}>
                   {cancelText}
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={this._onSubmitPress}>
+            <TouchableWithoutFeedback onPress={this._onSubmitPress} testID={submitButtonTestId}>
               <View style={[styles.dialogAction, buttonStyle, submitButtonStyle]}>
                 <Text style={[styles.dialogActionText, buttonTextStyle, submitButtonTextStyle]}>
                   {submitText}
